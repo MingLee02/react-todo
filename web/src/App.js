@@ -1,22 +1,32 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
+import TodoList from './components/todo-list';
+import CreateTodo from './components/create-todo';
 import './App.css';
 
 class App extends Component {
-  state = {users: []}
-
-  componentDidMount() {
-    fetch('/users')
-      .then(res => res.json())
-      .then(users => this.setState({ users }));
-  }
-
   render() {
     return (
-      <div className="App">
-        <h1>Users</h1>
-        {this.state.users.map(user =>
-          <div key={user.id}>{user.username}</div>
-        )}
+      <div>
+        <h1>Todo App</h1>
+        <Router>
+          <div>
+            <div className="App">
+                <Link to="/">Home</Link>
+            </div>
+
+            <div className="container">
+              <Switch>
+                <Route exact path="/" component={TodoList} />
+              </Switch>
+            </div>
+          </div>
+        </Router>
       </div>
     );
   }

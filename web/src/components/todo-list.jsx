@@ -1,37 +1,58 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
-import CreateTodo from './create-todo';
+var $ = require("jquery");
+
+export const addList = function(title) {
+    $.ajax({
+        method: 'POST',
+        url: "/todos/create",
+        data: { title: title }
+    }).done(function(msg) {
+        window.location.reload()
+    })
+}
 
 class App extends Component {
-  state = {todoLists: []}
+    componentDidMount() {
+        $.get( "/todos/list", function( data ) {}).then(todoLists => this.setState({ todoLists }));
+    }
 
-  componentDidMount() {
-    fetch('/todos/list')
-      .then(res => res.json())
-      .then(todoLists => this.setState({ todoLists }));
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+          value: '',
+          todoLists: [],
+        };
 
-  render() {
-    return (
-      <div>
-        <h2>Todo List</h2>
-        {this.state.todoLists.map(list =>
-          <div key={list.id}>{list.title}</div>
-        )}
-        <Router>
-          <Switch>
-            <Route exact path="/create-todo-list" component={CreateTodo} />
-            <button><Link to="/create-todo-list">Create New List</Link></button>
-          </Switch>
-        </Router>
-      </div>
-    );
-  }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+
+    handleSubmit(event) {
+        addList(this.state.value)
+        event.preventDefault();
+    }
+
+    render() {
+        return (
+            <div>
+                <h2>Todo List</h2>
+                {this.state.todoLists.map(list =>
+                <div key={list.id}>{list.title}</div>
+                )}
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        New List: 
+                        <input type="text" value={this.state.value} onChange={this.handleChange} />
+                    </label>
+                    <input type="submit" value="Submit" />
+                </form>
+            </div>
+        );
+    }
 }
 
 export default App;

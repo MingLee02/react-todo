@@ -6,7 +6,6 @@ import {
   Link
 } from 'react-router-dom';
 import TodoList from './components/todo-list';
-import CreateTodo from './components/create-todo';
 import './App.css';
 
 class App extends Component {

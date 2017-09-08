@@ -1,4 +1,11 @@
 import React, { Component } from 'react';
+import TodoListDetail from './todo-detail';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
 var $ = require("jquery");
 
 export const addList = function(title) {
@@ -6,9 +13,9 @@ export const addList = function(title) {
         method: 'POST',
         url: "/todos/create",
         data: { title: title }
-    }).done(function(msg) {
-        window.location.reload()
     })
+    
+    window.location.reload()
 }
 
 class App extends Component {
@@ -40,16 +47,25 @@ class App extends Component {
         return (
             <div>
                 <h2>Todo List</h2>
-                {this.state.todoLists.map(list =>
-                <div key={list.id}>{list.title}</div>
-                )}
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        New List: 
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
+                <Router>
+                    <div>
+                        {this.state.todoLists.map(list =>
+                            <li key={list.id}><Link to={'/details/'+list.id }>{list.title}</Link></li>
+                        )}
+                        <form onSubmit={this.handleSubmit}>
+                            <label>
+                                New List: 
+                                <input type="text" value={this.state.value} onChange={this.handleChange} />
+                            </label>
+                            <input type="submit" value="Submit" />
+                        </form>
+                        <div className="container">
+                          <Switch>
+                            <Route path="/details/:value" component={TodoListDetail} />
+                          </Switch>
+                        </div>
+                    </div>
+                </Router>
             </div>
         );
     }

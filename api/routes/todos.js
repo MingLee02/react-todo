@@ -9,5 +9,6 @@ router.get('/', function(req, res, next) {
 
 router.post('/create', todosController.create);
 router.get('/list', todosController.list);
+router.get('/:todoId', todosController.detail);
 
 module.exports = router;

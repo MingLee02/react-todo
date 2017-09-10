@@ -10,5 +10,6 @@ router.get('/', function(req, res, next) {
 router.post('/create', todosController.create);
 router.get('/list', todosController.list);
 router.get('/:todoId', todosController.detail);
+router.delete('/:todoId/delete', todosController.delete);
 
 module.exports = router;

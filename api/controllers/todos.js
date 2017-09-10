@@ -18,7 +18,6 @@ module.exports = {
         });
     },
     detail(req, res) {
-        console.log(req.params)
         Todo.findById(req.params.todoId, {
           include: [{
             model: TodoItem,
@@ -31,6 +30,20 @@ module.exports = {
             });
           }
           return res.status(200).send(todo);
+        }).catch(error => res.status(400).send(error));
+    },
+    delete(req, res) {
+        Todo.findById(req.params.todoId).then(todo => {
+          if (!todo) {
+            return res.status(404).send({
+              message: 'Todo Not Found',
+            });
+          }
+          const title = todo.title;
+          return todo
+            .destroy()
+            .then(() => res.status(204).send({ message: title + 'deleted successfully.' }))
+            .catch(error => res.status(400).send(error));
         }).catch(error => res.status(400).send(error));
     }
 };

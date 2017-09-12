@@ -8,5 +8,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/create', controller.create);
+router.put('/:todoItemId/update', controller.update);
 
 module.exports = router;

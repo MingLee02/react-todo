@@ -16,8 +16,6 @@ export const addItem = function(item) {
             todoId: listId
         }
     })
-    
-    window.location.reload()
 }
 
 export const getList = function() {
@@ -35,7 +33,7 @@ export const getList = function() {
     return result;
 }
 
-export const deleteList = function (listId) {
+export const deleteList = function () {
     var listId = getId();
 
     $.ajax({
@@ -48,6 +46,24 @@ export const deleteList = function (listId) {
     });
 }
 
+export const updateItem = function (id, status) {
+    var listId = getId();
+    $.ajax({
+        url: "/todos/item/" + id + "/update",
+        type: 'put',
+        async: false,
+        data: { 
+            todoItemId: id,
+            todoId: listId,
+            complete: status
+        },
+        success: function(data) {
+        } 
+    });
+}
+
+var items = null;
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -58,10 +74,25 @@ class App extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     handleChange(event) {
         this.setState({value: event.target.value});
+    }
+
+    handleInputChange(event) {
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].id == event.target.value) {
+                if (items[i].complete === false) {
+                    items[i].complete = true;
+                } else {
+                    items[i].complete = false;
+                }
+                updateItem(items[i].id, items[i].complete)
+            }
+        }
     }
 
     handleSubmit(event) {
@@ -71,13 +102,25 @@ class App extends Component {
 
     render() {
         var list = getList()
-        var items = list.todoItems;
+        items = list.todoItems;
 
         return (
             <div>
                 <h2>{list.title}</h2>
                 {items.map(list =>
-                    <li key={list.id}>{list.content}</li>
+                    <li key={list.id}>
+                        <form>
+                            <label>
+                              <input
+                                name="complete"
+                                type="checkbox"
+                                value={list.id}
+                                defaultChecked={list.complete}
+                                onChange={this.handleInputChange} />
+                            </label>
+                        </form>
+                        {list.content}
+                    </li>
                 )}
                 <form onSubmit={this.handleSubmit}>
                     <label>

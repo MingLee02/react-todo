@@ -86,11 +86,10 @@ class App extends Component {
         for (var i = 0; i < items.length; i++) {
             if (items[i].id == event.target.value) {
                 if (items[i].complete === false) {
-                    items[i].complete = true;
+                    updateItem(items[i].id, true)
                 } else {
-                    items[i].complete = false;
+                    updateItem(items[i].id, false)
                 }
-                updateItem(items[i].id, items[i].complete)
             }
         }
     }

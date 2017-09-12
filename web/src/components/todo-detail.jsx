@@ -84,7 +84,7 @@ class App extends Component {
 
     handleInputChange(event) {
         for (var i = 0; i < items.length; i++) {
-            if (items[i].id == event.target.value) {
+            if (items[i].id === event.target.value) {
                 if (items[i].complete === false) {
                     updateItem(items[i].id, true)
                 } else {

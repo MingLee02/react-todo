@@ -45,28 +45,26 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <h2>Todo List</h2>
-                <Router>
-                    <div>
-                        {this.state.todoLists.map(list =>
-                            <li key={list.id}><Link to={'/details/'+list.id }>{list.title}</Link></li>
-                        )}
-                        <form onSubmit={this.handleSubmit}>
-                            <label>
-                                New List: 
-                                <input type="text" value={this.state.value} onChange={this.handleChange} />
-                            </label>
-                            <input type="submit" value="Submit" />
-                        </form>
-                        <div className="container">
-                          <Switch>
-                            <Route path="/details/:value" component={TodoListDetail} />
-                          </Switch>
-                        </div>
+            <Router>
+                <div>
+                    <h2>List</h2>
+                    {this.state.todoLists.map(list =>
+                        <li key={list.id}><Link to={'/details/'+list.id }>{list.title}</Link></li>
+                    )}
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            New List: <br></br>
+                            <input type="text" value={this.state.value} onChange={this.handleChange} />
+                        </label>
+                        <input type="submit" value="Submit" />
+                    </form>
+                    <div className="container">
+                      <Switch>
+                        <Route path="/details/:value" component={TodoListDetail} />
+                      </Switch>
                     </div>
-                </Router>
-            </div>
+                </div>
+            </Router>
         );
     }
 }

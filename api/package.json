@@ -2,6 +2,6 @@
   "name": "api",
   "private": true,
   "scripts": {
-    "start": "PORT=3001 node ./bin/www"
+    "start": "node ./bin/www"
   }
 }

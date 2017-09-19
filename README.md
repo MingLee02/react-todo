@@ -12,6 +12,8 @@ You will need npm installed.
 ### Installing
 
 On linux/mac you can use `make install`
+On Windows
+`npm install -g sequelize-cli`
 
 ### Next Steps
 	Dockerise up the database.

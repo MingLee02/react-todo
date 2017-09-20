@@ -111,21 +111,21 @@ class App extends Component {
 
         return (
             <div>
-                <h2>{list.title}</h2>
                 <a href='/'>List</a>
-                {items.map(list =>
-                    <li key={list.id}>
+                <h2>{list.title}</h2>
+                {items.map(item =>
+                    <li key={item.id}>
                         <form>
                             <label>
                               <input
                                 name="complete"
                                 type="checkbox"
-                                value={list.id}
-                                defaultChecked={list.complete}
+                                value={item.id}
+                                defaultChecked={item.complete}
                                 onChange={this.handleInputChange} />
                             </label>
                         </form>
-                        {list.content}
+                        {item.content}
                     </li>
                 )}
                 <form onSubmit={this.handleSubmit}>

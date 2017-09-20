@@ -62,6 +62,11 @@ export const updateItem = function (id, status) {
     });
 }
 
+export const getItems = function () {
+    var list = getList()
+    return list.todoItems;
+}
+
 var items = null;
 
 class App extends Component {
@@ -83,8 +88,9 @@ class App extends Component {
     }
 
     handleInputChange(event) {
+        var items = getItems()
         for (var i = 0; i < items.length; i++) {
-            if (items[i].id === event.target.value) {
+            if (items[i].id === parseInt(event.target.value, 10)) {
                 if (items[i].complete === false) {
                     updateItem(items[i].id, true)
                 } else {

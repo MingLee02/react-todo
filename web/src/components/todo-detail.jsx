@@ -125,8 +125,8 @@ class App extends Component {
                                     defaultChecked={item.complete}
                                     onChange={this.handleInputChange} />
                                 </label>
+                                {item.content}
                             </form>
-                            {item.content}
                         </li>
                     )}
                 </ul>
@@ -137,6 +137,7 @@ class App extends Component {
                     </label>
                     <input type="submit" value="Submit" />
                 </form>
+                <br/>
                 <button onClick={deleteList}>
                     Delete List
                 </button>

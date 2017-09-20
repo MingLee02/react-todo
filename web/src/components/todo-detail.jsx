@@ -113,21 +113,23 @@ class App extends Component {
             <div>
                 <a href='/'>List</a>
                 <h2>{list.title}</h2>
-                {items.map(item =>
-                    <li key={item.id}>
-                        <form>
-                            <label>
-                              <input
-                                name="complete"
-                                type="checkbox"
-                                value={item.id}
-                                defaultChecked={item.complete}
-                                onChange={this.handleInputChange} />
-                            </label>
-                        </form>
-                        {item.content}
-                    </li>
-                )}
+                <ul>
+                    {items.map(item =>
+                        <li key={item.id}>
+                            <form>
+                                <label>
+                                  <input
+                                    name="complete"
+                                    type="checkbox"
+                                    value={item.id}
+                                    defaultChecked={item.complete}
+                                    onChange={this.handleInputChange} />
+                                </label>
+                            </form>
+                            {item.content}
+                        </li>
+                    )}
+                </ul>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Add New Todo Item: 

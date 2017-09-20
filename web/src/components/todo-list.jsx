@@ -47,9 +47,11 @@ class List extends Component {
         return (
             <div>
                 <h2>List</h2>
-                {this.state.todoLists.map(list =>
-                    <li key={list.id}><Link to={'/details/'+list.id }>{list.title}</Link></li>
-                )}
+                <ul>
+                    {this.state.todoLists.map(list =>
+                        <li class='todo-list' key={list.id}><Link to={'/details/'+list.id }>{list.title}</Link></li>
+                    )}
+                </ul>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         New List: <br></br>

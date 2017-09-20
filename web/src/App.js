@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from 'react-router-dom';
 import TodoList from './components/todo-list';
 import './App.css';
@@ -15,10 +14,6 @@ class App extends Component {
         <h1>Todo App</h1>
         <Router>
           <div>
-            <div className="App">
-                <Link to="/">Home</Link>
-            </div>
-
             <div className="container">
               <Switch>
                 <Route exact path="/" component={TodoList} />

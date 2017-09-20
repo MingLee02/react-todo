@@ -112,6 +112,7 @@ class App extends Component {
         return (
             <div>
                 <h2>{list.title}</h2>
+                <a href='/'>List</a>
                 {items.map(list =>
                     <li key={list.id}>
                         <form>

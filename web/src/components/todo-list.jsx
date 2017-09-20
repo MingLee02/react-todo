@@ -18,7 +18,7 @@ export const addList = function(title) {
     window.location.reload()
 }
 
-class App extends Component {
+class List extends Component {
     componentDidMount() {
         $.get( "/todos/list", function( data ) {}).then(todoLists => this.setState({ todoLists }));
     }
@@ -45,25 +45,31 @@ class App extends Component {
 
     render() {
         return (
+            <div>
+                <h2>List</h2>
+                {this.state.todoLists.map(list =>
+                    <li key={list.id}><Link to={'/details/'+list.id }>{list.title}</Link></li>
+                )}
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        New List: <br></br>
+                        <input type="text" value={this.state.value} onChange={this.handleChange} />
+                    </label>
+                    <input type="submit" value="Submit" />
+                </form>
+            </div>
+        );
+    }
+}
+
+class App extends Component {
+    render() {
+        return (
             <Router>
-                <div>
-                    <h2>List</h2>
-                    {this.state.todoLists.map(list =>
-                        <li key={list.id}><Link to={'/details/'+list.id }>{list.title}</Link></li>
-                    )}
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                            New List: <br></br>
-                            <input type="text" value={this.state.value} onChange={this.handleChange} />
-                        </label>
-                        <input type="submit" value="Submit" />
-                    </form>
-                    <div className="container">
-                      <Switch>
-                        <Route path="/details/:value" component={TodoListDetail} />
-                      </Switch>
-                    </div>
-                </div>
+                <Switch>
+                    <Route exact path="/" component={List} />
+                    <Route path="/details/:value" component={TodoListDetail} />
+                </Switch>
             </Router>
         );
     }

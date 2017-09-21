@@ -49,14 +49,11 @@ class List extends Component {
                 <h2>List</h2>
                 <ul>
                     {this.state.todoLists.map(list =>
-                        <li class='todo-list' key={list.id}><Link to={'/details/'+list.id }>{list.title}</Link></li>
+                        <li key={list.id}><Link to={'/details/'+list.id }>{list.title}</Link></li>
                     )}
                 </ul>
                 <form onSubmit={this.handleSubmit}>
-                    <label>
-                        New List: <br></br>
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
+                    <input type="text" value={this.state.value} placeholder="Add New List"onChange={this.handleChange} />
                     <input type="submit" value="Submit" />
                 </form>
             </div>

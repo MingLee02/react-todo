@@ -14,7 +14,7 @@ module.exports = {
     },
     list(req, res) {
         Todo.findAll({}).then(function(todos) {
-            res.json(todos);
+          res.json(todos);
         });
     },
     detail(req, res) {

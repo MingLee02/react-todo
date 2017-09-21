@@ -131,11 +131,8 @@ class App extends Component {
                     )}
                 </ul>
                 <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Add New Todo Item: 
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
-                    <input type="submit" value="Submit" />
+                    <input type="text" value={this.state.value} placeholder="Add New Todo Item" onChange={this.handleChange} />
+                    <input type="submit" value="Add new todo" />
                 </form>
                 <br/>
                 <button onClick={deleteList}>

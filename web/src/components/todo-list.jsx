@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import TodoListDetail from './todo-detail';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
   Link
 } from 'react-router-dom';
 var $ = require("jquery");
@@ -18,7 +14,7 @@ export const addList = function(title) {
     window.location.reload()
 }
 
-class List extends Component {
+class App extends Component {
     componentDidMount() {
         $.get( "/todos/list", function( data ) {}).then(todoLists => this.setState({ todoLists }));
     }
@@ -57,19 +53,6 @@ class List extends Component {
                     <input type="submit" value="Submit" />
                 </form>
             </div>
-        );
-    }
-}
-
-class App extends Component {
-    render() {
-        return (
-            <Router>
-                <Switch>
-                    <Route exact path="/" component={List} />
-                    <Route path="/details/:value" component={TodoListDetail} />
-                </Switch>
-            </Router>
         );
     }
 }

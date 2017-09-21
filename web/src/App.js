@@ -5,6 +5,7 @@ import {
   Route
 } from 'react-router-dom';
 import TodoList from './components/todo-list';
+import TodoListDetail from './components/todo-detail';
 import './App.css';
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
           <div>
             <div className="container">
               <Switch>
+                <Route path="/details/:value" component={TodoListDetail} />
                 <Route exact path="/" component={TodoList} />
               </Switch>
             </div>

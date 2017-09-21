@@ -16,6 +16,7 @@ export const addItem = function(item) {
             todoId: listId
         }
     })
+    window.location.reload();
 }
 
 export const getList = function() {

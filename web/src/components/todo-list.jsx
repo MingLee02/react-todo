@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 var $ = require("jquery");
 
-export const addList = function(title) {
+export const addList = (title) => {
     $.ajax({
         method: 'POST',
         url: "/todos/create",

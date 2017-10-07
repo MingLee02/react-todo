@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 var $ = require("jquery");
 
-export const getId = function() {
-    return window.location.pathname.replace('/details/', '');
-}
+export const getId = () => { return window.location.pathname.replace('/details/', '') };
 
-export const addItem = function(item) {
+export const addItem = (item) => {
     var listId = getId();
 
     $.ajax({
@@ -19,7 +17,7 @@ export const addItem = function(item) {
     window.location.reload();
 }
 
-export const getList = function() {
+export const getList = () => {
     var result = null;
     var listId = getId();
 
@@ -34,7 +32,7 @@ export const getList = function() {
     return result;
 }
 
-export const deleteList = function () {
+export const deleteList = () => {
     var listId = getId();
 
     $.ajax({
@@ -47,7 +45,7 @@ export const deleteList = function () {
     });
 }
 
-export const updateItem = function (id, status) {
+export const updateItem = (id, status) => {
     var listId = getId();
     $.ajax({
         url: "/todos/item/" + id + "/update",
@@ -63,7 +61,7 @@ export const updateItem = function (id, status) {
     });
 }
 
-export const getItems = function () {
+export const getItems = () => {
     var list = getList()
     return list.todoItems;
 }
